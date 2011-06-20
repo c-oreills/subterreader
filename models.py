@@ -9,3 +9,6 @@ class Document(models.Model):
   url = models.CharField(max_length=255)
   user = models.ForeignKey(User)
   is_read = models.BooleanField()
+
+  def __str__(self):
+    return self.url

@@ -12,3 +12,7 @@ class Document(models.Model):
 
   def __str__(self):
     return self.url
+
+  def clean(self):
+    if '://' not in self.url[:10]:
+      self.url = 'http://%s' % self.url

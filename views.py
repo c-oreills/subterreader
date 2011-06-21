@@ -14,5 +14,6 @@ def settings(request):
 
 @login_required
 def read(request):
-  return HttpResponse('iFrames full of docs on reading list')
+  documents_list = Document.objects.filter(user=request.user).all()
+  return render_to_response('subterreader/read.html', {'documents_list': documents_list})
 

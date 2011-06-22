@@ -18,3 +18,6 @@ def read(request):
   documents_list = Document.objects.filter(user=request.user).all()
   return render_to_response('subterreader/read.html', {'documents_list': documents_list}, RequestContext(request))
 
+@login_required
+def iframe(request, url):
+  return render_to_response('subterreader/iframe.html', {'url': url}, RequestContext(request))

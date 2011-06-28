@@ -10,7 +10,7 @@ class Document(models.Model):
   user = models.ForeignKey(User)
   is_read = models.BooleanField()
 
-  def __str__(self):
+  def __unicode__(self):
     return self.url
 
   def clean(self):

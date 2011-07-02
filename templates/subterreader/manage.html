@@ -1,0 +1,13 @@
+Current user: {{ request.user }}
+{% if documents_list %}
+    <ul>
+    {% for document in documents_list %}
+        <li><a href="{{ document.url }}/">{{ document.url }}</a></li>
+    {% endfor %}
+    </ul>
+    <p>
+      <a href="read">Read</a>
+    </p>
+{% else %}
+    <p>No documents are available.</p>
+{% endif %}

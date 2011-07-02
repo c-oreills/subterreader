@@ -10,5 +10,7 @@ function load_url_to_container(url, container) {
 }
 
 function sanitize(ext_html){
+  ext_html.find('script').remove();
+  ext_html.find('noscript').remove();
   return ext_html;
 }

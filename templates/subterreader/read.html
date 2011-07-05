@@ -19,6 +19,17 @@
             <div>
               <p>{{ document.url }}</p>
               <div id="container-{{ forloop.counter0 }}"></div>
+              <hr />
+              <div id="control-{{ forloop.counter0 }}">
+                {% if not forloop.first %}
+                  <a href="">&lt;&lt; Back</a>
+                {% endif %}
+                <a href="">Mark above as read</a>
+                {% if not forloop.last %}
+                <a href="">Skip &gt;&gt;</a>
+                {% endif %}
+              </div>
+              <hr />
             </div>
         {% endfor %}
     {% else %}

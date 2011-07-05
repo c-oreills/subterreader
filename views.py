@@ -15,5 +15,5 @@ def settings(request):
 
 @login_required
 def read(request):
-    documents_list = Document.objects.filter(user=request.user).all()
+    documents_list = Document.objects.filter(user=request.user, is_read=False).all()
     return render(request, 'subterreader/read.html', {'documents_list': documents_list})

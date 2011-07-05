@@ -6,14 +6,14 @@ from subterreader.models import Document
 
 @login_required
 def manage(request):
-  documents_list = Document.objects.filter(user=request.user).all()
-  return render_to_response('subterreader/manage.html', {'documents_list': documents_list})
+    documents_list = Document.objects.filter(user=request.user).all()
+    return render_to_response('subterreader/manage.html', {'documents_list': documents_list})
 
 @login_required
 def settings(request):
-  return HttpResponse('User settings')
+    return HttpResponse('User settings')
 
 @login_required
 def read(request):
-  documents_list = Document.objects.filter(user=request.user).all()
-  return render_to_response('subterreader/read.html', {'documents_list': documents_list}, RequestContext(request))
+    documents_list = Document.objects.filter(user=request.user).all()
+    return render_to_response('subterreader/read.html', {'documents_list': documents_list}, RequestContext(request))

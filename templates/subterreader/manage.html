@@ -1,13 +1,23 @@
-Current user: {{ request.user }}
-{% if documents_list %}
-    <ul>
-    {% for document in documents_list %}
-        <li><a href="{{ document.url }}/">{{ document.url }}</a></li>
-    {% endfor %}
-    </ul>
-    <p>
-      <a href="read">Read</a>
-    </p>
-{% else %}
-    <p>No documents are available.</p>
-{% endif %}
+<!DOCTYPE html>
+<!-- TODO: factor out this common code into a base template -->
+<html>
+  <head>
+    <script type="text/javascript" src="{{ STATIC_URL }}jquery-1.6.1.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}reset.css"></link>
+  </head>
+  <body>
+    Current user: {{ request.user }}
+    {% if documents_list %}
+        <ul>
+        {% for document in documents_list %}
+            <li><a href="{{ document.url }}/">{{ document.url }}</a></li>
+        {% endfor %}
+        </ul>
+        <p>
+          <a href="read">Read</a>
+        </p>
+    {% else %}
+        <p>No documents are available.</p>
+    {% endif %}
+  </body>
+</html>

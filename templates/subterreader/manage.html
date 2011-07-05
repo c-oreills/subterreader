@@ -6,7 +6,7 @@
     <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}reset.css"></link>
   </head>
   <body>
-    Current user: {{ request.user }}
+    Current user: {{ user }}
     {% if documents_list %}
         <ul>
         {% for document in documents_list %}

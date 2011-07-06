@@ -1,39 +1,37 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <script type="text/javascript" src="{{ STATIC_URL }}jquery-1.6.1.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}reset.css"></link>
-    <script type="text/javascript" src="{{ STATIC_URL }}subterreader/read.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        {% for document in documents_list %}
-        load_url_to_container('{{ document.url }}', $('#container-{{ forloop.counter0 }}'));
-        {% endfor %}
-        });
-    </script>
-  </head>
-  <body>
-    Current user: {{ request.user }}
-    {% if documents_list %}
-        {% for document in documents_list %}
-            <div>
-              <p>{{ document.url }}</p>
-              <div id="container-{{ forloop.counter0 }}"></div>
-              <hr />
-              <div id="control-{{ forloop.counter0 }}">
-                {% if not forloop.first %}
-                  <a href="">&lt;&lt; Back</a>
-                {% endif %}
-                <a href="">Mark above as read</a>
-                {% if not forloop.last %}
-                <a href="">Skip &gt;&gt;</a>
-                {% endif %}
-              </div>
-              <hr />
+{% extends 'subterreader/base.html' %}
+
+{% block head %}
+  <script type="text/javascript" src="{{ STATIC_URL }}subterreader/read.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      {% for document in documents_list %}
+      load_url_to_container('{{ document.url }}', $('#container-{{ forloop.counter0 }}'));
+      {% endfor %}
+      });
+  </script>
+{% endblock %}
+
+{% block content %}
+  Current user: {{ request.user }}
+  {% if documents_list %}
+      {% for document in documents_list %}
+          <div>
+            <p>{{ document.url }}</p>
+            <div id="container-{{ forloop.counter0 }}"></div>
+            <hr />
+            <div id="control-{{ forloop.counter0 }}">
+              {% if not forloop.first %}
+                <a href="">&lt;&lt; Back</a>
+              {% endif %}
+              <a href="">Mark above as read</a>
+              {% if not forloop.last %}
+              <a href="">Skip &gt;&gt;</a>
+              {% endif %}
             </div>
-        {% endfor %}
-    {% else %}
-        <p>No documents are available.</p>
-    {% endif %}
-  </body>
-</html>
+            <hr />
+          </div>
+      {% endfor %}
+  {% else %}
+      <p>No documents are available.</p>
+  {% endif %}
+{% endblock %}

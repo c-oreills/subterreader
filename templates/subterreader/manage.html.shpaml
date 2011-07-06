@@ -1,0 +1,13 @@
+{% extends 'subterreader/base.html.shpaml' %}
+
+{% block content %}
+{% if documents_list %}
+  ul
+    {% for document in documents_list %}
+    li > a href="{{ document.url }}/" | {{ document.url }}
+    {% endfor %}
+  p > a href="read" | Read
+{% else %}
+  p | No documents are available.
+{% endif %}
+{% endblock %}

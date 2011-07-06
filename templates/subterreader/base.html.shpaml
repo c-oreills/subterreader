@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <script type="text/javascript" src="{{ STATIC_URL }}jquery-1.6.1.min.js"></script>
+html
+  head
     <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}reset.css"></link>
+    <script type="text/javascript" src="{{ STATIC_URL }}jquery-1.6.2.js"></script>
     {% block head %}{% endblock %}
-  </head>
-  <body>
+  body
+    #header
+      p | Current user: {{ user }}
     {% block content %}{% endblock %}
-  </body>
-</html>

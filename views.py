@@ -7,7 +7,7 @@ from subterreader.models import Document
 @login_required
 def manage(request):
     documents_list = Document.objects.filter(user=request.user).all()
-    return render(request, 'subterreader/manage.html.shpaml', {'documents_list': documents_list})
+    return render(request, 'subterreader/manage.html.haml', {'documents_list': documents_list})
 
 @login_required
 def settings(request):
@@ -16,4 +16,4 @@ def settings(request):
 @login_required
 def read(request):
     documents_list = Document.objects.filter(user=request.user, is_read=False).all()
-    return render(request, 'subterreader/read.html.shpaml', {'documents_list': documents_list})
+    return render(request, 'subterreader/read.html.haml', {'documents_list': documents_list})

@@ -1,0 +1,31 @@
+- extends 'subterreader/base.html.haml'
+
+- block head
+  <script type="text/javascript" src="{{ STATIC_URL }}subterreader/read.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      {% for document in documents_list %}
+      load_url_to_container('{{ document.url }}', $('#container-{{ forloop.counter0 }}'));
+      {% endfor %}
+      });
+  </script>
+
+- block content
+  - if documents_list
+    - for document in documents_list
+      %div
+        %p {{ document.url }}
+        %div{'id': "container-{{ forloop.counter0 }}"} &nbsp;
+        %hr
+        %div{'id': "control-{{ forloop.counter0 }}"}
+          - if not forloop.first
+            %span
+              %a{'href':""} &lt;&lt; Back
+          %span
+            %a{'href':""} Mark above as read
+          - if not forloop.last
+            %span
+              %a{'href':""} Skip &gt;&gt;
+        %hr
+    - else
+      %p No documents are available.

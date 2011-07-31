@@ -1,0 +1,12 @@
+- extends 'subterreader/base.html.haml'
+
+- block content
+  - if documents_list
+    %ul
+      - for document in documents_list
+        %li 
+          %a{'href': "{{ document.url }}/"}= document.url
+    %p
+      %a{'href': "read"} Read
+  - else
+    %p No documents are available.

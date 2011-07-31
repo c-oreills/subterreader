@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-html
-  head
+%html
+  %head
     <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}reset.css"></link>
     <script type="text/javascript" src="{{ STATIC_URL }}jquery-1.6.2.min.js"></script>
-    {% block head %}{% endblock %}
-  body
+    - block head
+  %body
     #header
-      p | Current user: {{ user }}
-    {% block content %}{% endblock %}
+      %p Current user: {{ user }}
+    - block content

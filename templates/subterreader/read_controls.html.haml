@@ -1,9 +1,11 @@
 %div{'id': "control-{{ index }}"}
+  %a{'name': "control-{{ index }}"}
   - if not index == 0
     %span
-      %a{'href':""} &lt;&lt; Back
+      %a{'href':"#control-{{ index|add:-1 }}"} &lt;&lt; Back
     %span
       %a{'href':""} Mark above as read
+      -# TODO: Add Javascript to store this in cookie
   - if not index == total
     %span
-      %a{'href':""} Skip &gt;&gt;
+      %a{'href':"#control-{{ index|add:1 }}"} Skip &gt;&gt;

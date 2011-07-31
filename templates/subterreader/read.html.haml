@@ -12,20 +12,13 @@
 
 - block content
   - if documents_list
+    - include 'subterreader/read_controls.html.haml' with index=0 total=documents_list.length
     - for document in documents_list
       %div
+        %hr
         %p {{ document.url }}
         %div{'id': "container-{{ forloop.counter0 }}"} &nbsp;
         %hr
-        %div{'id': "control-{{ forloop.counter0 }}"}
-          - if not forloop.first
-            %span
-              %a{'href':""} &lt;&lt; Back
-          %span
-            %a{'href':""} Mark above as read
-          - if not forloop.last
-            %span
-              %a{'href':""} Skip &gt;&gt;
-        %hr
+        - include 'subterreader/read_controls.html.haml' with index=forloop.counter total=documents_list.length
     - else
       %p No documents are available.

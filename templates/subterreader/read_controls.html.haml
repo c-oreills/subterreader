@@ -1,0 +1,9 @@
+%div{'id': "control-{{ index }}"}
+  - if not index == 0
+    %span
+      %a{'href':""} &lt;&lt; Back
+    %span
+      %a{'href':""} Mark above as read
+  - if not index == total
+    %span
+      %a{'href':""} Skip &gt;&gt;

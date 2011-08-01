@@ -6,6 +6,8 @@
     %span
       %a{'href':""} Mark above as read
       -# TODO: Add Javascript to store this in cookie
+  %span
+    %a{'href':".."} Manage
   - ifnotequal index total
     %span
       %a{'href':"#control-{{ index|add:1 }}"} Skip &gt;&gt;

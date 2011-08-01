@@ -1,0 +1,5 @@
+%form{'action':'', 'method':'post'}
+  - csrf_token
+  -# TODO: Ensure CSRF works in both normal submission and AJAX
+  %label#add-url Add URL:
+  %input#add-url{'name': 'url'}

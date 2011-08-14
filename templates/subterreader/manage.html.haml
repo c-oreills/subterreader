@@ -1,6 +1,7 @@
 - extends 'subterreader/base.html.haml'
 
 - block content
+  - include 'subterreader/add.html.haml'
   - if documents_list
     %ul
       - for document in documents_list

@@ -1,5 +1,6 @@
 %form{'action':'', 'method':'post'}
   - csrf_token
   -# TODO: Ensure CSRF works in both normal submission and AJAX
-  %label#add-url Add URL:
-  %input#add-url{'name': 'url'}
+  %p Add a new web page:
+  = form.as_p
+  %input{'type':'submit', 'value':'Submit'}

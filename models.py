@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.forms import ModelForm
 
-# Create your models here.
 class Document(models.Model):
     """
     A webpage added to the reading list
@@ -19,7 +17,3 @@ class Document(models.Model):
             self.url = 'http://%s' % self.url
 
 
-class AddDocumentForm(ModelForm):
-    class Meta:
-        model = Document
-        fields = ('url',)

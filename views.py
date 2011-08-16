@@ -2,16 +2,21 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.template import RequestContext
-from subterreader.models import Document, AddDocumentForm
+from subterreader.forms import AddDocumentForm
+from subterreader.models import Document
 
 @login_required
 def manage(request):
     if request.method == 'POST':
         form = AddDocumentForm(request.POST)
+        # TODO: Ensure urls field is cleaned
         if form.is_valid():
-            document = form.save(commit=False)
-            document.user = request.user
-            document.save()
+            documents, errors = form.create_documents()
+            for document in documents:
+                document.user = request.user
+                document.save()
+            for error in errors:
+                pass # TODO: Handle errors in a meaningful way, display to user etc
     else:
         form = AddDocumentForm()
     context = {

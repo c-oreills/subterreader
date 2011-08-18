@@ -17,11 +17,7 @@ sanitize = (ext_html) ->
         orig_ext_html = ext_html
     ext_html.find('script').remove()
     ext_html.find('noscript').remove()
-    clean_html = []
-    for node in ext_html
-        do (node) ->
-            if node.constructor isnt HTMLScriptElement
-                clean_html.push(node)
+    clean_html = (node for node in ext_html when node.constructor isnt HTMLScriptElement)
     if DEBUG
         window.debug.sanitize ?= []
         window.debug.sanitize.push([orig_ext_html, clean_html])

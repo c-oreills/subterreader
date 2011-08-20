@@ -2,13 +2,13 @@
 
 - block content
   - include 'subterreader/add.html.haml'
-  - if documents_list
+  - if webpages_list
     %ul
-      - for document in documents_list
+      - for webpage in webpages_list
         %li 
-          %a{'href': "{{ document.url }}/"}= document.url
+          %a{'href': "{{ webpage.url }}/"}= webpage.url
     %br
     %p
       %a{'href': "read"} Read
   - else
-    %p No documents are available.
+    %p No webpages are available.

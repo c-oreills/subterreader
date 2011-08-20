@@ -2,25 +2,25 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.template import RequestContext
-from subterreader.forms import AddDocumentForm
-from subterreader.models import Document
+from subterreader.forms import AddWebpageForm
+from subterreader.models import Webpage
 
 @login_required
 def manage(request):
     if request.method == 'POST':
-        form = AddDocumentForm(request.POST)
+        form = AddWebpageForm(request.POST)
         # TODO: Ensure urls field is cleaned
         if form.is_valid():
-            documents, errors = form.create_documents()
-            for document in documents:
-                document.user = request.user
-                document.save()
+            webpages, errors = form.create_webpages()
+            for webpage in webpages:
+                webpage.user = request.user
+                webpage.save()
             for error in errors:
                 pass # TODO: Handle errors in a meaningful way, display to user etc
     else:
-        form = AddDocumentForm()
+        form = AddWebpageForm()
     context = {
-        'documents_list': Document.objects.filter(user=request.user).all(),
+        'webpages_list': Webpage.objects.filter(user=request.user).all(),
         'form': form,
         }
     return render(request, 'subterreader/manage.html.haml', context)
@@ -31,5 +31,5 @@ def settings(request):
 
 @login_required
 def read(request):
-    documents_list = Document.objects.filter(user=request.user, is_read=False).all()
-    return render(request, 'subterreader/read.html.haml', {'documents_list': documents_list})
+    webpages_list = Webpage.objects.filter(user=request.user, is_read=False).all()
+    return render(request, 'subterreader/read.html.haml', {'webpages_list': webpages_list})

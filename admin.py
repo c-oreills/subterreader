@@ -1,4 +1,4 @@
-from subterreader.models import Document
+from subterreader.models import Webpage
 from django.contrib import admin
 
-admin.site.register(Document)
+admin.site.register(Webpage)

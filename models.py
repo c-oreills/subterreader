@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Document(models.Model):
+class Webpage(models.Model):
     """
     A webpage added to the reading list
     """

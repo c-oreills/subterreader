@@ -1,0 +1,14 @@
+#main {
+    max-width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 10px;
+}
+
+.read-control-outer {
+    text-align: center;
+}
+
+.read-control-inner {
+    margin: auto;
+}

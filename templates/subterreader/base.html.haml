@@ -2,12 +2,15 @@
 %html
   %head
     <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}reset.css"></link>
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}typography.css"></link>
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}subterreader/sub.css"></link>
     <script type="text/javascript" src="{{ STATIC_URL }}jquery-1.6.2.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}jquery.cookie.js"></script>
     - block head
   %body
-    #header
-      %h1 Subterreader
-      %p Current user: {{ user }}
-      %br
-    - block content
+    #main
+      #header
+        %h1 Subterreader
+        %p Current user: {{ user }}
+        %br
+      - block content

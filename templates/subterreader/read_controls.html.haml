@@ -1,12 +1,19 @@
-%div{'id': "control-{{ index }}"}
-  %a{'name': "control-{{ index }}"}
-  - ifnotequal index 0
+%div.read-control-outer{'id': "control-{{ index }}"}
+  %span.read-control-inner
+    %a{'name': "control-{{ index }}"}
+    - ifnotequal index 0
+      %span
+        %a{'href':"#control-{{ index|add:-1 }}"} &laquo; Back
+      %span
+        &middot;
+      %span
+        %a{'href':"#", 'onclick':"return mark_as_read({{ webpage_id }});"} Mark above as read
+      %span
+        &middot;
     %span
-      %a{'href':"#control-{{ index|add:-1 }}"} &lt;&lt; Back
-    %span
-      %a{'href':"#", 'onclick':"return mark_as_read({{ webpage_id }});"} Mark above as read
-  %span
-    %a{'href':".."} Manage
-  - ifnotequal index total
-    %span
-      %a{'href':"#control-{{ index|add:1 }}"} Skip &gt;&gt;
+      %a{'href':".."} Manage
+    - ifnotequal index total
+      %span
+        &middot;
+      %span
+        %a{'href':"#control-{{ index|add:1 }}"} Skip &raquo;

@@ -23,3 +23,12 @@ sanitize = (ext_html) ->
         window.debug.sanitize.push([orig_ext_html, clean_html])
     return clean_html
 
+window.mark_as_read = (webpage_id) ->
+    # TODO: Try as an Ajax call first, use cookie on failure
+    read_list = $.cookie('read_webpages')?.split(',')
+    read_list ?= []
+    webpage_id = webpage_id.toString()
+    if webpage_id not in read_list
+        read_list.push(webpage_id)
+    $.cookie('read_webpages', read_list.join(','), {path: '/', expires:1000})
+    return false

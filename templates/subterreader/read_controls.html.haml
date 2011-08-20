@@ -4,8 +4,7 @@
     %span
       %a{'href':"#control-{{ index|add:-1 }}"} &lt;&lt; Back
     %span
-      %a{'href':""} Mark above as read
-      -# TODO: Add Javascript to store this in cookie
+      %a{'href':"#", 'onclick':"return mark_as_read({{ webpage_id }});"} Mark above as read
   %span
     %a{'href':".."} Manage
   - ifnotequal index total

@@ -12,14 +12,14 @@
 
 - block content
   - if webpages_list
-    - with webpages_list|length as docs_len
-      - include 'subterreader/read_controls.html.haml' with index=0 total=docs_len
+    - with webpages_list|length as webpages_len
+      - include 'subterreader/read_controls.html.haml' with index=0 total=webpages_len
       - for webpage in webpages_list
         %div
           %hr
           %p {{ webpage.url }}
           %div{'id': "container-{{ forloop.counter0 }}"} &nbsp;
           %hr
-          - include 'subterreader/read_controls.html.haml' with index=forloop.counter total=docs_len
+          - include 'subterreader/read_controls.html.haml' with index=forloop.counter total=webpages_len
     - else
       %p No webpages are available.

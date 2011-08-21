@@ -1,7 +1,10 @@
 - extends 'subterreader/base.html.haml'
 
 - block head
-  <script type="text/javascript" src="{{ STATIC_URL }}subterreader/read.js"></script>
+  - load compress
+  - compress js
+    <script type="text/coffeescript" src="{{ STATIC_URL }}subterreader/coffee/read.coffee"></script>
+  - endcompress
   <script type="text/javascript">
     $(document).ready(function () {
       {% for webpage in webpages_list %}

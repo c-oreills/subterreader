@@ -7,10 +7,23 @@
     <script type="text/javascript" src="{{ STATIC_URL }}jquery-1.6.2.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}jquery.cookie.js"></script>
     - block head
+    %title
+      - block title
+        Subterreader
   %body
     #main
       #header
         %h1 Subterreader
-        %p Current user: {{ user }}
+        #user
+          - if user.is_authenticated
+            %span
+              Current user: {{ user }}
+            %span
+              %a{'href': "/accounts/logout"} Log out
+          - else
+            %span
+              Sign up (unavailable - currently in beta)
+            %span
+              %a{'href': "/accounts/login"} Log in
         %br
       - block content

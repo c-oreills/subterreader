@@ -5,6 +5,12 @@ from subterreader.view_decorators import mark_read_pages
 from subterreader.forms import AddWebpageForm
 from subterreader.models import Webpage
 
+def main(request):
+    if request.user.is_authenticated():
+        return manage(request)
+    else:
+        return render(request, 'subterreader/intro.html.haml')
+
 @login_required
 @mark_read_pages
 def manage(request):
@@ -35,4 +41,9 @@ def settings(request):
 @mark_read_pages
 def read(request):
     webpages_list = Webpage.objects.filter(user=request.user, is_read=False).all()
+    return render(request, 'subterreader/read.html.haml', {'webpages_list': webpages_list})
+
+def sample(request):
+    sample_urls = ('http://norvig.com/21-days.html', 'http://www.paulgraham.com/avg.html', 'http://www.ccs.neu.edu/home/shivers/autoweapons.html')
+    webpages_list = [Webpage(url=url) for url in sample_urls]
     return render(request, 'subterreader/read.html.haml', {'webpages_list': webpages_list})

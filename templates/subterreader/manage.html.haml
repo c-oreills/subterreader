@@ -7,8 +7,7 @@
       - for webpage in webpages_list
         %li 
           %a{'href': "{{ webpage.url }}/"}= webpage.url
-    %br
-    %p
+    %span
       %a{'href': "read"} Read
   - else
-    %p No webpages are available.
+    %span No webpages are available.

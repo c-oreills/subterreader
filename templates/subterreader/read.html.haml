@@ -25,4 +25,6 @@
           %hr
           - include 'subterreader/read_controls.html.haml' with index=forloop.counter total=webpages_len webpage_id=webpage.id
     - else
-      %p No webpages are available.
+      %span No webpages are available.
+      %span
+        %a{'href':"{% url subterreader.views.main %}"} Back to main

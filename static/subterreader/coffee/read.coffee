@@ -1,7 +1,8 @@
-DEBUG = true
+DEBUG = window.DEBUG
+HOLD = window.HOLD
+
 if DEBUG
     window.debug = {}
-HOLD = true
 
 window.load_url_to_container = (url, container) ->
     # Use YQL as advised in http://www.wait-till-i.com/2010/01/10/loading-external-content-with-ajax-using-jquery-and-yql/

@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from subterreader.view_decorators import mark_read_pages
+from subterreader.view_decorators import process_read_pages_cookie
 from subterreader.forms import AddWebpageForm
 from subterreader.models import Webpage
 
@@ -12,7 +12,7 @@ def main(request):
         return render(request, 'subterreader/intro.html.haml')
 
 @login_required
-@mark_read_pages
+@process_read_pages_cookie
 def manage(request):
     if request.method == 'POST':
         form = AddWebpageForm(request.POST)
@@ -33,15 +33,19 @@ def manage(request):
     return render(request, 'subterreader/manage.html.haml', context)
 
 @login_required
-@mark_read_pages
+@process_read_pages_cookie
 def settings(request):
     return HttpResponse('User settings')
 
 @login_required
-@mark_read_pages
+@process_read_pages_cookie
 def read(request):
-    webpages_list = Webpage.objects.filter(user=request.user, is_read=False).all()
-    return render(request, 'subterreader/read.html.haml', {'webpages_list': webpages_list})
+    if request.is_ajax():
+        # Token response for AJAX polling
+        return HttpResponse('live')
+    else:
+        webpages_list = Webpage.objects.filter(user=request.user, is_read=False).all()
+        return render(request, 'subterreader/read.html.haml', {'webpages_list': webpages_list})
 
 def sample(request):
     sample_urls = ('http://norvig.com/21-days.html', 'http://www.paulgraham.com/avg.html', 'http://www.ccs.neu.edu/home/shivers/autoweapons.html')

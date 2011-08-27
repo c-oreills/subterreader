@@ -26,21 +26,15 @@ sanitize = (ext_html) ->
     return clean_html
 
 window.mark_as_read = (webpage_id) ->
-    if not mark_as_read_ajax(webpage_id)
-        true
-        #mark_as_read_cookie(webpage_id)
-    return false
-
-mark_as_read_ajax = (webpage_id) ->
-    $.post('.', {
-        webpage_id: webpage_id
-    }).success((data) ->
-        alert('success!')
-        alert(data)
-    ).error((data) ->
-        alert('error!')
-        alert(data)
-    )
+    # TODO: slide the article and controls closed (keep page position intact)
+    ###
+    Set cookie and then send an async poll to server.
+    If server is reachable, the webpage will be marked as read
+    and the cookie deleted by Django.
+    If not, then the cookie will remain intact for subsequent requests.
+    ###
+    mark_as_read_cookie(webpage_id)
+    $.post('.')
     return false
 
 mark_as_read_cookie = (webpage_id) ->

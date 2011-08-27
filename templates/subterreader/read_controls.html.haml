@@ -7,7 +7,7 @@
       %span
         &middot;
       %span
-        %a{'href':"#", 'onclick':"return mark_as_read({{ webpage_id }});"} Mark above as read
+        %a{'href':"#", 'onclick':'return mark_as_read({{ webpage_id|default_if_none:"" }});'} Mark above as read
       %span
         &middot;
     %span

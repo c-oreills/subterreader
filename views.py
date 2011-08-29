@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from subterreader.view_decorators import process_read_pages_cookie
+from subterreader.view_decorators import process_read_pages_cookie, process_add_url_cookie
 from subterreader.forms import AddWebpageForm
 from subterreader.models import Webpage
 
@@ -13,6 +13,7 @@ def main(request):
 
 @login_required
 @process_read_pages_cookie
+@process_add_url_cookie
 def manage(request):
     if request.method == 'POST':
         form = AddWebpageForm(request.POST)
@@ -24,6 +25,8 @@ def manage(request):
                 webpage.save()
             for error in errors:
                 pass # TODO: Handle errors in a meaningful way, display to user etc
+        if request.is_ajax():
+            return HttpResponse('success')
     else:
         form = AddWebpageForm()
     context = {
@@ -34,11 +37,13 @@ def manage(request):
 
 @login_required
 @process_read_pages_cookie
+@process_add_url_cookie
 def settings(request):
     return HttpResponse('User settings')
 
 @login_required
 @process_read_pages_cookie
+@process_add_url_cookie
 def read(request):
     if request.is_ajax():
         # Token response for AJAX polling

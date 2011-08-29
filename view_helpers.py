@@ -19,3 +19,12 @@ def mark_webpages_as_read(webpage_ids, user):
         if not webpage.is_read:
             webpage.is_read = True
             webpage.save() # TODO: Make this a bulk transaction
+
+def add_urls_to_list(urls, user):
+    for url in urls:
+        webpage = Webpage(url=url, user=user)
+        try:
+            webpage.full_clean()
+        except Exception, e:
+            raise e # TODO: Handle validation errors properly
+        webpage.save()

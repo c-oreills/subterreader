@@ -34,6 +34,14 @@ add_link_onclicks = (html) ->
     )
     return html
 
+add_to_cookie_if_not_present = (cookie_name, value) ->
+    cookie_list = $.cookie(cookie_name)?.split(',')
+    cookie_list ?= []
+    value = value.toString()
+    if value not in cookie_list
+        cookie_list.push(value)
+    $.cookie(cookie_name, cookie_list.join(','), {path: '/', expires:1000})
+
 window.mark_as_read = (webpage_id) ->
     # TODO: slide the article and controls closed (keep page position intact)
     ###
@@ -47,12 +55,7 @@ window.mark_as_read = (webpage_id) ->
     return false
 
 mark_as_read_cookie = (webpage_id) ->
-    read_list = $.cookie('read_webpages')?.split(',')
-    read_list ?= []
-    webpage_id = webpage_id.toString()
-    if webpage_id not in read_list
-        read_list.push(webpage_id)
-    $.cookie('read_webpages', read_list.join(','), {path: '/', expires:1000})
+    add_to_cookie_if_not_present('read_webpages', webpage_id)
 
 window.click_link = (link) ->
     url = link.attr('href')
@@ -62,9 +65,13 @@ window.click_link = (link) ->
     link_add_div.data('url', url)
 
 window.add_url_to_list = (url) ->
-    # TODO: Actually implement
-    console.log(url)
+    add_url_to_list_cookie(url)
+    $.post('.')
     # TODO: Load content in dynamically and add to end of onscreen list
+    return false
+
+add_url_to_list_cookie = (url) ->
+    add_to_cookie_if_not_present('add_urls', url)
 
 window.goto_url = (url) ->
     window.location = url

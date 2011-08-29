@@ -12,7 +12,8 @@ window.load_url_to_container = (url, container) ->
             if not HOLD
                 ext_html = $(data.results[0])
                 clean_html = sanitize(ext_html)
-                container.html(clean_html)
+                linked_html = add_link_onclicks(clean_html)
+                container.html(linked_html)
     )
 
 sanitize = (ext_html) ->
@@ -25,6 +26,13 @@ sanitize = (ext_html) ->
         window.debug.sanitize ?= []
         window.debug.sanitize.push([orig_ext_html, clean_html])
     return clean_html
+
+add_link_onclicks = (html) ->
+    $(html).find('a').click(() ->
+        click_link($(this))
+        return false
+    )
+    return html
 
 window.mark_as_read = (webpage_id) ->
     # TODO: slide the article and controls closed (keep page position intact)
@@ -45,3 +53,18 @@ mark_as_read_cookie = (webpage_id) ->
     if webpage_id not in read_list
         read_list.push(webpage_id)
     $.cookie('read_webpages', read_list.join(','), {path: '/', expires:1000})
+
+window.click_link = (link) ->
+    url = link.attr('href')
+    link_add_div = $('#link-add-outer')
+    link_add_div.css('width', $(window).width())
+    link_add_div.slideDown()
+    link_add_div.data('url', url)
+
+window.add_url_to_list = (url) ->
+    # TODO: Actually implement
+    console.log(url)
+    # TODO: Load content in dynamically and add to end of onscreen list
+
+window.goto_url = (url) ->
+    window.location = url

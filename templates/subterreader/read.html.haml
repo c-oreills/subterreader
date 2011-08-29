@@ -29,3 +29,9 @@
       %span No webpages are available.
       %span
         %a{'href':"{% url subterreader.views.main %}"} Back to main
+  #link-add-outer
+    #link-add-inner
+      %span.button{'onclick': "add_url_to_list($('#link-add-outer').data('url'))"}
+        Add link to list
+      %span.button{'onclick': "goto_url($('#link-add-outer').data('url'))"}
+        Go to link

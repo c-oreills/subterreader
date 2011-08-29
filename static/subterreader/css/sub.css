@@ -12,3 +12,21 @@
 .read-control-inner {
     margin: auto;
 }
+
+#link-add-outer {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    padding: 4px 6px;
+    display: none;
+    background-color: #ddf;
+    text-align: center;
+}
+
+.button {
+    border: 1px solid #000;
+    padding: 2px 6px;
+    margin: 2px 6px;
+    background-color: #fff;
+    cursor: pointer;
+}

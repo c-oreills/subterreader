@@ -7,8 +7,9 @@ from urllib import unquote
 def make_process_cookie_wrapper(cookie_name, cookie_func):
     def process_cookie_wrapper(view_func):
         """
-        Wraps view functions, checks for read_webpages cookie in request and marks
-        specified webpages as read. Deletes the cookie afterwards.
+        Wraps view functions, checks for cookie_name in request's cookies,
+        splits into a set and calls cookie_func on it. Deletes the cookie
+        afterwards.
         """
         @wraps(view_func, assigned=available_attrs(view_func))
         def process_cookie(request, *args, **kwargs):

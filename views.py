@@ -29,7 +29,7 @@ def manage(request):
     else:
         form = AddWebpageForm()
     context = {
-        'webpages_list': Webpage.objects.filter(user=request.user, is_read=False).all(),
+        'webpages_list': Webpage.unread_by_age.filter(user=request.user).all(),
         'form': form,
         }
     return render(request, 'subterreader/manage.html.haml', context)
@@ -46,7 +46,7 @@ def read(request):
         # Token response for AJAX polling
         return HttpResponse('live')
     else:
-        webpages_list = Webpage.objects.filter(user=request.user, is_read=False).all()
+        webpages_list = Webpage.unread_by_age.filter(user=request.user).all()
         return render(request, 'subterreader/read.html.haml', {'webpages_list': webpages_list})
 
 def sample(request):

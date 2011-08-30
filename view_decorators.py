@@ -26,3 +26,7 @@ def make_process_cookie_wrapper(cookie_name, cookie_func):
 
 process_read_pages_cookie = make_process_cookie_wrapper('read_webpages', mark_webpages_as_read)
 process_add_url_cookie = make_process_cookie_wrapper('add_urls', add_urls_to_list)
+
+def process_cookies(fn):
+    return process_read_pages_cookie(
+            process_add_url_cookie(fn))

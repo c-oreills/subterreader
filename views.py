@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from subterreader.view_decorators import process_read_pages_cookie, process_add_url_cookie
+from subterreader.view_decorators import process_cookies
 from subterreader.forms import AddWebpageForm
 from subterreader.models import Webpage
 
@@ -12,8 +12,7 @@ def main(request):
         return render(request, 'subterreader/intro.html.haml')
 
 @login_required
-@process_read_pages_cookie
-@process_add_url_cookie
+@process_cookies
 def manage(request):
     if request.method == 'POST':
         form = AddWebpageForm(request.POST)
@@ -36,14 +35,12 @@ def manage(request):
     return render(request, 'subterreader/manage.html.haml', context)
 
 @login_required
-@process_read_pages_cookie
-@process_add_url_cookie
+@process_cookies
 def settings(request):
     return HttpResponse('User settings')
 
 @login_required
-@process_read_pages_cookie
-@process_add_url_cookie
+@process_cookies
 def read(request):
     if request.is_ajax():
         # Token response for AJAX polling
